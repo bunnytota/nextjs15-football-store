@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-const OrderCanceled = () => {
+const cancelled = () => {
   return (
     <div className="container mx-auto px-4">
       <div className="max-w-[400px] mx-auto">
@@ -31,4 +31,4 @@ const OrderCanceled = () => {
   );
 };
 
-export default OrderCanceled;
+export default cancelled;
