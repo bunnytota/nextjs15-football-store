@@ -1,10 +1,11 @@
 // Navbar.js
+"use client"
 import React from 'react';
 import Link from 'next/link';
 import { AiOutlineShopping } from 'react-icons/ai';
 import { Cart } from './';
-import { useStateContext } from '../context/StateContext';
-import MenuIcon from '@mui/icons-material/Menu';
+import { useStateContext } from '../../context/StateContext';
+// import MenuIcon from '@mui/icons-material/Menu';
 import { TemporaryDrawer } from './';
 
 const Navbar = () => {

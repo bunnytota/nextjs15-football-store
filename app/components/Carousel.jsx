@@ -1,4 +1,6 @@
 // Carousel.js
+"use client"
+
 import React, { useState, useEffect, useCallback, memo } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';

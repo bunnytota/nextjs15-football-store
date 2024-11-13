@@ -1,6 +1,6 @@
 // app/layout.js
 import { Toaster } from 'react-hot-toast';
-import { Navbar } from '@/components/Navbar';
+import { Navbar } from './components';
 import { StateContext } from '@/context/StateContext';
 import localFont from "next/font/local";
 import "./globals.css";

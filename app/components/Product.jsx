@@ -1,7 +1,8 @@
 // Product.js
+"use client"
 import React from 'react';
 import Link from 'next/link';
-import { urlFor } from '../lib/client';
+import { urlFor } from '../../lib/client';
 
 const Product = ({ product: { image, name, slug, price, discount } }) => {
   return (

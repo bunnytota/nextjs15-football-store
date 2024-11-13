@@ -1,9 +1,11 @@
+// app/product/[slug]/ProductDetails.js
+"use client"
 import React, { useState, useEffect } from 'react';
 import { AiOutlineMinus, AiOutlinePlus, AiFillStar, AiOutlineStar } from 'react-icons/ai';
-import { client, urlFor } from '@/lib/client';
-import Product from '@/components/Product';
-import FloaterHome from '@/components/FloaterHome';
-import { useStateContext } from '@/context/StateContext';
+import { urlFor } from '../../../lib/client';
+import Product from '../../components/Product';
+import FloaterHome from '../../components/Floaterhome';
+import { useStateContext } from '../../../context/StateContext';
 
 const ProductDetails = ({ product, products }) => {
   const { image, name, details, price, discount, size } = product;
@@ -26,7 +28,11 @@ const ProductDetails = ({ product, products }) => {
       <div className="product-detail-container flex flex-wrap gap-10 justify-center mt-20 mx-5">
         <div>
           <div className="image-container">
-            <img src={urlFor(image && image[index])} className="product-detail-image rounded-xl bg-gray-200 border border-black cursor-pointer transition duration-300 hover:bg-orange-400" />
+            <img 
+              src={urlFor(image && image[index])} 
+              className="product-detail-image rounded-xl bg-gray-200 border border-black cursor-pointer transition duration-300 hover:bg-orange-400" 
+              alt={name}
+            />
           </div>
           <div className="small-images-container flex gap-2 mt-5">
             {image?.map((item, i) => (
@@ -35,6 +41,7 @@ const ProductDetails = ({ product, products }) => {
                 src={urlFor(item)}
                 className={`small-image rounded-md bg-gray-200 w-[70px] h-[70px] cursor-pointer ${i === index ? 'border-2 border-orange-400' : ''}`}
                 onMouseEnter={() => setIndex(i)}
+                alt={`${name} ${i + 1}`}
               />
             ))}
           </div>
@@ -104,9 +111,11 @@ const ProductDetails = ({ product, products }) => {
           </div>
         </div>
       </div>
+      
       <div className="floaterhome fixed left-[80%] text-orange-400 bottom-[25%] md:bottom-[2%]">
         <FloaterHome />
       </div>
+      
       <div className="maylike-products-wrapper mt-20">
         <h2 className="text-center text-gray-700 text-2xl font-medium mb-10">Choose Any Product</h2>
         <div className="marquee overflow-x-hidden">
@@ -119,41 +128,6 @@ const ProductDetails = ({ product, products }) => {
       </div>
     </div>
   );
-};
-
-export const getStaticPaths = async () => {
-  const query = `*[_type == "product"] {
-    slug {
-      current
-    }
-  }`;
-
-  const products = await client.fetch(query);
-
-  const paths = products.map((product) => ({
-    params: {
-      slug: product.slug.current,
-    },
-  }));
-
-  return {
-    paths,
-    fallback: 'blocking',
-  };
-};
-
-export const getStaticProps = async ({ params: { slug } }) => {
-  const query = `*[_type == "product" && slug.current == '${slug}'][0]`;
-  const productsQuery = '*[_type == "product"]';
-
-  const product = await client.fetch(query);
-  const products = await client.fetch(productsQuery);
-
-  console.log(product);
-
-  return {
-    props: { products, product },
-  };
 };
 
 export default ProductDetails;
